@@ -1,4 +1,5 @@
 export enum authEndpoints {
     SignIn = "login",
-    SignUp = "setup"
+    SignUp = "setup",
+    CreateUser = "create_user"
 }

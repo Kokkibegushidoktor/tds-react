@@ -4,6 +4,10 @@ import {
     BASE_API_URL,
 } from "../consts/api.ts";
 
+export interface IErrorResponse {
+    error: string
+}
+
 export const authorizedApi = ky.create({
     prefixUrl: BASE_API_URL,
     hooks: {

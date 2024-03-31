@@ -4,6 +4,7 @@ import Login from "./pages/Login.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import AuthProvider from "./provider/AuthProvider.tsx";
 import Home from "./pages/Home.tsx";
+import Profile from "./pages/Profile.tsx";
 
 function App() {
 
@@ -14,8 +15,8 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/signup" element={<SignUp/>
-                    }/>
+                    <Route path="/signup" element={<SignUp/>}/>
+                    <Route path="/profile" element={<AuthProvider><Profile/></AuthProvider>}/>
                 </Routes>
             </Router>
         </>

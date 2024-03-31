@@ -6,76 +6,104 @@ import Box from '@mui/material/Box';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import AutohideSnackbar from "../components/CustomizableSnackbar.tsx";
+import * as React from "react";
+import {useForm} from "react-hook-form";
+import authService, { ISetUpRequest} from "../service/AuthService.ts";
+import {HTTPError} from "ky";
+import {IErrorResponse} from "../api/apiInstance.ts";
+import {useNavigate} from "react-router-dom";
 
 const SignUp = () => {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-            password_repeat: data.get('password_repeat')
-        });
+    const [open, setOpen] = React.useState(false);
+    const [text, setText] = React.useState("false");
+    const navigate = useNavigate()
+    const {
+        register,
+        handleSubmit
+    } = useForm<ISetUpRequest>()
+    const onSubmit = async (data: ISetUpRequest) => {
+        if (data.password != data.password_repeat) {
+            setText("Passwords do not match")
+            setOpen(true)
+            return
+        }
+        await authService.setUp(data).
+        then(() => {
+            setText("Redirecting to SignIn page...")
+            setOpen(true)
+            setTimeout(() =>
+                {
+                    navigate("/login")
+                },
+                3000);
+        }, async (error:HTTPError) => {
+            const err: IErrorResponse = await error.response?.json()
+            setText(error.response?error.response.status + " " + err.error:error.toString())
+            setOpen(true)
+        })
     };
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-                sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <PermContactCalendarIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign Up
-                </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password_repeat"
-                        label="Repeat Password"
-                        type="password"
-                        id="password_repeat"
-                    />
-
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
+        <>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <PermContactCalendarIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
                         Sign Up
-                    </Button>
+                    </Typography>
+                    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
+                        <TextField {...register('username')}
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField {...register('password')}
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                        />
+                        <TextField {...register('password_repeat')}
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password_repeat"
+                            label="Repeat Password"
+                            type="password"
+                            id="password_repeat"
+                        />
+
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Sign Up
+                        </Button>
+                    </Box>
                 </Box>
-            </Box>
-        </Container>
+            </Container>
+            <AutohideSnackbar open={open} text={text} setOpen={setOpen} duration={5000}></AutohideSnackbar>
+        </>
     );
 }
 
