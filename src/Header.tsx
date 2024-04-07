@@ -142,6 +142,7 @@ function Header() {
                         </Typography>
                     </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Link to="/tasks"><Button sx={{ my: 2, color: 'white', display: 'block' }}>Tasks</Button></Link>
                         {pages.map((page) => (
                             <Button
                                 key={page}

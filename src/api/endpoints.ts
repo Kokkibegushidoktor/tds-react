@@ -3,3 +3,8 @@ export enum authEndpoints {
     SignUp = "setup",
     CreateUser = "create_user"
 }
+
+export enum taskEndpoints {
+    ListTasks = "task",
+    MethodTask = "task/"
+}

@@ -48,6 +48,7 @@ const Profile = () => {
         <>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
+                <Typography fontSize={20} m={2} align={'center'}>Your Profile</Typography>
                 <Box component="section" sx={{ p: 2, m:3, border: '1px dashed grey' }}>
                     {/*<Typography>{decode.sub}</Typography>*/}
                     <Typography>Your name: {decode.name}</Typography>
