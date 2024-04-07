@@ -48,10 +48,13 @@ const Profile = () => {
         <>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Typography>{decode.sub}</Typography>
-                <Typography>{decode.name}</Typography>
-                <Typography>{decode.adm?"yes":"no"}</Typography>
-                <Typography>{decode.rls?decode.rls.toString():"empty"}</Typography>
+                <Box component="section" sx={{ p: 2, m:3, border: '1px dashed grey' }}>
+                    {/*<Typography>{decode.sub}</Typography>*/}
+                    <Typography>Your name: {decode.name}</Typography>
+                    <Typography>Your roles: {decode.rls?decode.rls.toString():"empty"}</Typography>
+                    {decode.adm?<Typography color={"red"}>Admin privileges enabled</Typography>:<></>}
+                </Box>
+
                 {decode.adm?<>
                     <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                         <TextField {...register('username')}
@@ -71,7 +74,7 @@ const Profile = () => {
                         </Button>
                     </Box></>:<></>}
             </Container>
-            <AutohideSnackbar open={open} text={text} setOpen={setOpen} setText={setText} duration={6000}></AutohideSnackbar>
+            <AutohideSnackbar open={open} text={text} setOpen={setOpen} duration={6000}></AutohideSnackbar>
         </>
     )
 }

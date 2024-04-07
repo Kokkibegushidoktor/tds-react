@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp.tsx";
 import AuthProvider from "./provider/AuthProvider.tsx";
 import Home from "./pages/Home.tsx";
 import Profile from "./pages/Profile.tsx";
+import Task from "./pages/Task.tsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route path="/profile" element={<AuthProvider><Profile/></AuthProvider>}/>
+                    <Route path="/task/:id" element={<AuthProvider><Task/></AuthProvider>}/>
                 </Routes>
             </Router>
         </>

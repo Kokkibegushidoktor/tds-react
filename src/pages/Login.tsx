@@ -61,8 +61,7 @@ const Login = () => {
                                        margin="normal"
                                        required
                                        fullWidth
-                                       label="Email Address"
-                                       autoComplete="email"
+                                       label="Username"
                                        autoFocus
                             />
                             <TextField {...register('password')}
