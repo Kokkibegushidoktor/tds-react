@@ -6,5 +6,10 @@ export enum authEndpoints {
 
 export enum taskEndpoints {
     ListTasks = "task",
-    MethodTask = "task/"
+    MethodTask = "task/",
+    NewLevel = "level",
+    MethodLevel = "level/",
+    NewQuestion = "question",
+    MethodQuestion = "question/",
+    ListFiles = "files"
 }

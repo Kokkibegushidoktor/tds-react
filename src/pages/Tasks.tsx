@@ -45,26 +45,28 @@ const Tasks = () => {
     const content = isLoading ? (
         <div>Loading...</div>
     ) : (
-            <Grid mt={2} container justifyContent="center" spacing={2}>
-                {data.results.map((value) => (
-                    <Grid key={value.id} item>
-                        <Card sx={{ minWidth:200, maxWidth: 345 }}>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {value.title}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {value.description}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Link to={"/task/"+value.id}><Button size="small">View</Button></Link>
-                                <Link to={"/task/"+value.id}><Button size="small">Delete</Button></Link>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
+            data.results?
+                <Grid mt={2} container justifyContent="center" spacing={2}>
+                    {data.results.map((value) => (
+                        <Grid key={value.id} item>
+                            <Card sx={{ minWidth:200, maxWidth: 345 }}>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {value.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {value.description}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Link to={"/task/"+value.id}><Button size="small">View</Button></Link>
+                                    <Link to={"/task/"+value.id}><Button size="small">Delete</Button></Link>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+                : <>No tasks yet</>
     );
 
     return <div>{content}</div>;

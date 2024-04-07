@@ -15,7 +15,6 @@ import Avatar from "@mui/material/Avatar";
 import {useAuth} from "./store/UseAuth.ts";
 import {Link, useNavigate} from 'react-router-dom';
 
-const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Logout'];
 
 function Header() {
@@ -113,12 +112,9 @@ function Header() {
                             sx={{
                                 display: { xs: 'block', md: 'none' },
                             }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
+                        ><MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
+                            <Link to={"/tasks"}><Typography color={'black'} textAlign="center">{"Tasks"}</Typography></Link>
+                        </MenuItem>
                         </Menu>
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -143,15 +139,6 @@ function Header() {
                     </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Link to="/tasks"><Button sx={{ my: 2, color: 'white', display: 'block' }}>Tasks</Button></Link>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
                     </Box>
 
                     {isAuth?
