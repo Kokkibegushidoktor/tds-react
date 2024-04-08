@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import authService, {ISignInRequest, ISignInResponse} from "../service/AuthService.ts";
 import {useForm} from 'react-hook-form';
 import {useAuth} from "../store/UseAuth.ts";
@@ -15,6 +15,7 @@ import AutohideSnackbar from "../components/CustomizableSnackbar.tsx";
 import * as React from "react";
 
 const Login = () => {
+    const { state } = useLocation();
     const { setAuth } = useAuth();
     const navigate = useNavigate()
 
@@ -31,7 +32,7 @@ const Login = () => {
         then((resp: ISignInResponse) => {
             localStorage.setItem("token",resp.token)
             setAuth(true)
-            navigate("/")
+            navigate(state?.myPath?state.myPath:"/")
         }, (reason) => {
             console.log(reason)
             setOpen(true)

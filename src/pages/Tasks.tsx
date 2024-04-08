@@ -46,16 +46,16 @@ const Tasks = () => {
         <div>Loading...</div>
     ) : (
             data.results?
-                <Grid mt={2} container justifyContent="center" spacing={2}>
+                <Grid sx={{flexDirection:"column", padding:"0 20px"}} mt={2} container justifyContent="center" spacing={2}>
                     {data.results.map((value) => (
                         <Grid key={value.id} item>
-                            <Card sx={{ minWidth:200, maxWidth: 345 }}>
+                            <Card sx={{height:"140px"}}>
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
                                         {value.title}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {value.description}
+                                    <Typography height={22} sx={{overflow:'hidden'}} variant="body2" color="text.secondary">
+                                        {value.description.length>100?value.description.substring(0, 100)+"...":value.description}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>

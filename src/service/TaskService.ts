@@ -96,6 +96,10 @@ export interface IListFilesResponse {
     ] | null
 }
 
+export interface IUploadImageResponse {
+    url: string
+}
+
 class TaskService  {
     async getTask (id: string)  {
         return await authorizedApi
@@ -148,6 +152,12 @@ class TaskService  {
         return await authorizedApi
             .get(taskEndpoints.ListFiles, {searchParams: {page, pageSize}})
             .json<IListFilesResponse>()
+    }
+
+    async uploadImage (data: FormData) {
+        return await authorizedApi
+            .post(taskEndpoints.UploadFile, {body: data})
+            .json<IUploadImageResponse>()
     }
 }
 

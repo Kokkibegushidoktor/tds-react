@@ -1,14 +1,16 @@
 import {FC, PropsWithChildren, useEffect} from 'react';
 import {useAuth} from "../store/UseAuth.ts";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const AuthProvider:FC<PropsWithChildren> = ({children}) => {
     const { isAuth } = useAuth();
     const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
 
     useEffect(() => {
         if (!isAuth) {
-            navigate("/login")
+            navigate("/login",{state:{myPath:location.pathname}})
         }
     }, []);
     return children;

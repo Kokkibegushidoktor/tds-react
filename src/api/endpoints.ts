@@ -11,5 +11,6 @@ export enum taskEndpoints {
     MethodLevel = "level/",
     NewQuestion = "question",
     MethodQuestion = "question/",
-    ListFiles = "files"
+    ListFiles = "files",
+    UploadFile = "upload_image"
 }

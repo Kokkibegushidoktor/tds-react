@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
 import taskService, {IAddLevelQuestionRequest} from "../service/TaskService.ts";
 import TitlebarImageList from "../components/CustomImageList.tsx";
+import {ChangeEvent, useRef} from "react";
 
 const NewQuestion = () => {
     const navigate = useNavigate()
@@ -15,6 +16,7 @@ const NewQuestion = () => {
         handleSubmit,
         setValue
     } = useForm<IAddLevelQuestionRequest>()
+    const fileRef = useRef<HTMLInputElement | null>(null);
 
     const onSubmit = async (data: IAddLevelQuestionRequest) => {
         data.levelId = id?id:"empty"
@@ -56,21 +58,42 @@ const NewQuestion = () => {
                     <TextField {...register('contentUrl')}
                                margin="normal"
                                fullWidth
-                               
                     />
                     <Typography>Select an image below or enter a custom URL</Typography>
+                    <input accept=".jpg,.jpeg,.png, .webp" onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                        if (event.target.files && event.target.files[0]) {
+                            const requestData: FormData = new FormData()
+                            requestData.append('file', event.target.files[0])
+                            taskService.uploadImage(requestData)
+                                .then((resp)=>{
+                                    setValue("contentUrl", resp.url)
+                                })
+                        }
+                    }} ref={fileRef} style={{visibility:"hidden", height:0, width:0}} type={"file"}/>
+                    <Button
+                        type="button"
+                        color={'secondary'}
+                        fullWidth
+                        variant="contained"
+                        onClick={()=>{
+                            if (fileRef.current) {
+                                fileRef.current.click()
+                            }
+                        }}
+                        sx={{ mt: 3 }}
+                    >
+                        Upload a file
+                    </Button>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 1, mb: 2 }}
                     >
                         Create
                     </Button>
 
                     <TitlebarImageList setValue={setValue}></TitlebarImageList>
-
-
                 </Box>
             </Box>
         </>
