@@ -2,8 +2,8 @@ version: '3'
 
 services:
   client:
-    build:
-      dockerfile: Dockerfile
+    image: task-dispenser-client
+    container_name: tds_client
+    build: .
     ports:
       - "3000:80"
-    restart: unless-stopped
