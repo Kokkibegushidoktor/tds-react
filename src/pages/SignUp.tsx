@@ -60,7 +60,7 @@ const SignUp = () => {
                         <PermContactCalendarIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign Up
+                        Регистрация
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                         <TextField {...register('username')}
@@ -68,7 +68,7 @@ const SignUp = () => {
                             required
                             fullWidth
                             id="username"
-                            label="Username"
+                            label="Имя пользователя"
                             autoFocus
                         />
                         <TextField {...register('password')}
@@ -76,7 +76,7 @@ const SignUp = () => {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Пароль"
                             type="password"
                             id="password"
                         />
@@ -85,7 +85,7 @@ const SignUp = () => {
                             required
                             fullWidth
                             name="password_repeat"
-                            label="Repeat Password"
+                            label="Повторите Пароль"
                             type="password"
                             id="password_repeat"
                         />
@@ -96,7 +96,7 @@ const SignUp = () => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Зарегистрироваться
                         </Button>
                     </Box>
                 </Box>

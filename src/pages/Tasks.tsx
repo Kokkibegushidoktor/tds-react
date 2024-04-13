@@ -6,6 +6,9 @@ import {Card, CardActions, CardContent} from "@mui/material";
 import taskService from "../service/TaskService.ts";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {HTTPError} from "ky";
+import IconButton from "@mui/material/IconButton";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 function useQuery() {
     const { search } = useLocation();
 
@@ -16,13 +19,7 @@ const Tasks = () => {
         page: 0,
         pageSize: 0,
         total: 0,
-        results: [
-            {
-                id: "string",
-                title: "string",
-                description: "string"
-            }
-        ]
+        results: null
     });
     const [isLoading, setIsLoading] = React.useState(true);
     const query = useQuery()
@@ -35,17 +32,26 @@ const Tasks = () => {
         setIsLoading(false);
     };
 
+    const handleApiError = (error: HTTPError) => {
+        if (error.response.status == 404) {
+            setIsLoading(false)
+        }
+    }
+
     React.useEffect(() => {
         getData();
     }, []);
     const getData = () =>
         taskService.listTasks(page?page:"1", pageSize?pageSize:"10")
             .then(handleApiResponse)
+            .catch(handleApiError)
 
     const content = isLoading ? (
         <div>Loading...</div>
     ) : (
-            data.results?
+        <>
+            <Link to={"newtask"}><IconButton sx={{ml:5}}><AddCircleIcon/></IconButton></Link>
+            {data.results?
                 <Grid sx={{flexDirection:"column", padding:"0 20px"}} mt={2} container justifyContent="center" spacing={2}>
                     {data.results.map((value) => (
                         <Grid key={value.id} item>
@@ -66,7 +72,7 @@ const Tasks = () => {
                         </Grid>
                     ))}
                 </Grid>
-                : <>No tasks yet</>
+                : <>No tasks yet</>} </>
     );
 
     return <div>{content}</div>;
