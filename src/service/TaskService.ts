@@ -56,6 +56,15 @@ export interface IPatchTaskRequest {
     description: string,
 }
 
+export interface IAddTaskRequest {
+    title: string,
+    description: string,
+}
+
+export interface IAddTaskResponse {
+    id: string
+}
+
 export interface IPatchTaskLevelRequest {
     title: string,
     varQuestCount: number
@@ -105,6 +114,12 @@ class TaskService  {
         return await authorizedApi
             .get("task/"+id, {})
             .json<IGetTaskResponse>()
+    }
+
+    async addTask(data: IAddTaskRequest) {
+        return await authorizedApi
+            .post(taskEndpoints.ListTasks, {json:{...data}})
+            .json<IAddTaskResponse>()
     }
 
      async listTasks (page: string, pageSize: string) {

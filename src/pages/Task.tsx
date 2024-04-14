@@ -115,11 +115,15 @@ const Task = () => {
                                         </Stack>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <IconButton><EditIcon/></IconButton>
+                                        <Link to={"/quest/"+val.id+"?title="+val.title+"&desc="+val.description+"&img="+val.contentURL}><IconButton><EditIcon/></IconButton></Link>
                                         <IconButton><DeleteForeverIcon/></IconButton>
                                         <Divider sx={{mt:2, mb:2}} variant="middle" component="p" />
-                                        <Typography sx={{ wordBreak: "break-word"}}>{val.description}</Typography>
-                                        {val.contentURL?
+                                        <Typography sx={{wordBreak: "break-word"}}>
+                                            <pre style={{fontFamily: 'inherit'}}>
+                                                {val.description}
+                                            </pre>
+                                        </Typography>
+                                        {val.contentURL ?
                                             <Box
                                                 component="img"
                                                 sx={{

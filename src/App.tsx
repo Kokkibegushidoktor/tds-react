@@ -10,6 +10,8 @@ import Tasks from "./pages/Tasks.tsx";
 import NewLevel from "./pages/NewLevel.tsx";
 import EditLevel from "./pages/EditLevel.tsx";
 import NewQuestion from "./pages/NewQuestion.tsx";
+import NewTask from "./pages/NewTask.tsx";
+import EditQuestion from "./pages/EditQuestion.tsx";
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
                     <Route path="/task/:id/newlevel" element={<AuthProvider><NewLevel/></AuthProvider>}/>
                     <Route path="/level/:id" element={<AuthProvider><EditLevel/></AuthProvider>}/>
                     <Route path="/level/:id/newquest" element={<AuthProvider><NewQuestion/></AuthProvider>}/>
+                    <Route path="/newtask" element={<AuthProvider><NewTask/></AuthProvider>}/>
+                    <Route path="/quest/:id" element={<AuthProvider><EditQuestion/></AuthProvider>}/>
                 </Routes>
             </Router>
         </>

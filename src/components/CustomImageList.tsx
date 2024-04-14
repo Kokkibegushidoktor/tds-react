@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import {Modal} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {UseFormSetValue} from "react-hook-form";
+import {HTTPError} from "ky";
 
 function useQuery() {
     const { search } = useLocation();
@@ -47,6 +48,12 @@ export default function TitlebarImageList(props:ImgListProps) {
         setIsLoading(false);
     };
 
+    const handleApiError = (error: HTTPError) => {
+        if (error.response.status == 404) {
+            setIsLoading(false)
+        }
+    }
+
     React.useEffect(() => {
         getData();
     }, []);
@@ -57,6 +64,7 @@ export default function TitlebarImageList(props:ImgListProps) {
     const getData = () =>
         taskService.listFiles(page?page:"1", pageSize?pageSize:"10")
             .then(handleApiResponse)
+            .catch(handleApiError)
 
     const content = isLoading ? (
         <div>Loading...</div>

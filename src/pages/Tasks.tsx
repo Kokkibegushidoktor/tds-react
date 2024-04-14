@@ -50,7 +50,7 @@ const Tasks = () => {
         <div>Loading...</div>
     ) : (
         <>
-            <Link to={"newtask"}><IconButton sx={{ml:5}}><AddCircleIcon/></IconButton></Link>
+            <Link to={"/newtask"}><IconButton sx={{ml:5}}><AddCircleIcon/></IconButton></Link>
             {data.results?
                 <Grid sx={{flexDirection:"column", padding:"0 20px"}} mt={2} container justifyContent="center" spacing={2}>
                     {data.results.map((value) => (
