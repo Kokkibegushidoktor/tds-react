@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
 import taskService, {IAddLevelQuestionRequest, IPatchQuestionRequest} from "../service/TaskService.ts";
 import TitlebarImageList from "../components/CustomImageList.tsx";
-import React, {ChangeEvent, useRef} from "react";
+import React, {ChangeEvent, useRef, useState} from "react";
+import {BASE_API_URL} from "../consts/api.ts";
 
 function useQuery() {
     const { search } = useLocation();
@@ -26,6 +27,7 @@ const EditQuestion = () => {
         setValue
     } = useForm<IAddLevelQuestionRequest>()
     const fileRef = useRef<HTMLInputElement | null>(null);
+    const [preview, setPreview] = useState(img?img:"")
 
     const onSubmit = async (data: IPatchQuestionRequest) => {
         await taskService.patchLevelQuestion(id?id:"empty", data)
@@ -62,8 +64,19 @@ const EditQuestion = () => {
                                fullWidth
                                label="Description"
                                multiline
-                               rows={4}
+                               minRows={4}
                                defaultValue={desc}
+                    />
+                    <Box
+                        component="img"
+                        sx={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            maxHeight: { xs: 300, md: 167 },
+                            maxWidth: { xs: 350, md: 250 },
+                        }}
+                        alt={""}
+                        src={preview.replace("LOCAL/",BASE_API_URL)}
                     />
                     <TextField {...register('contentUrl')}
                                margin="normal"
@@ -78,6 +91,7 @@ const EditQuestion = () => {
                             taskService.uploadImage(requestData)
                                 .then((resp)=>{
                                     setValue("contentUrl", resp.url)
+                                    setPreview(resp.url)
                                 })
                         }
                     }} ref={fileRef} style={{visibility:"hidden", height:0, width:0}} type={"file"}/>
@@ -104,7 +118,7 @@ const EditQuestion = () => {
                         Save
                     </Button>
 
-                    <TitlebarImageList setValue={setValue}></TitlebarImageList>
+                    <TitlebarImageList setPreview={setPreview} setValue={setValue}></TitlebarImageList>
                 </Box>
             </Box>
         </>

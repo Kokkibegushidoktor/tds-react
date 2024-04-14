@@ -6,9 +6,12 @@ import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
 import taskService, {IAddLevelQuestionRequest} from "../service/TaskService.ts";
 import TitlebarImageList from "../components/CustomImageList.tsx";
-import {ChangeEvent, useRef} from "react";
+import {ChangeEvent, useRef, useState} from "react";
+import {BASE_API_URL} from "../consts/api.ts";
 
 const NewQuestion = () => {
+    const [preview, setPreview] = useState("")
+
     const navigate = useNavigate()
     const {id} = useParams()
     const {
@@ -53,7 +56,18 @@ const NewQuestion = () => {
                                fullWidth
                                label="Description"
                                multiline
-                               rows={4}
+                               minRows={4}
+                    />
+                    <Box
+                        component="img"
+                        sx={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            maxHeight: { xs: 300, md: 167 },
+                            maxWidth: { xs: 350, md: 250 },
+                        }}
+                        alt={""}
+                        src={preview.replace("LOCAL/",BASE_API_URL)}
                     />
                     <TextField {...register('contentUrl')}
                                margin="normal"
@@ -93,7 +107,7 @@ const NewQuestion = () => {
                         Create
                     </Button>
 
-                    <TitlebarImageList setValue={setValue}></TitlebarImageList>
+                    <TitlebarImageList setPreview={setPreview} setValue={setValue}></TitlebarImageList>
                 </Box>
             </Box>
         </>

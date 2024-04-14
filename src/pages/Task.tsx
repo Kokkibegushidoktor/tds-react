@@ -115,7 +115,7 @@ const Task = () => {
                                         </Stack>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <Link to={"/quest/"+val.id+"?title="+val.title+"&desc="+val.description+"&img="+val.contentURL}><IconButton><EditIcon/></IconButton></Link>
+                                        <Link to={"/quest/"+val.id+"?title="+val.title+"&desc="+encodeURI(val.description)+"&img="+val.contentURL}><IconButton><EditIcon/></IconButton></Link>
                                         <IconButton><DeleteForeverIcon/></IconButton>
                                         <Divider sx={{mt:2, mb:2}} variant="middle" component="p" />
                                         <Typography sx={{wordBreak: "break-word"}}>

@@ -22,6 +22,7 @@ function useQuery() {
 
 type ImgListProps = {
     setValue: UseFormSetValue<IAddLevelQuestionRequest>
+    setPreview?:  React.Dispatch<React.SetStateAction<string>>
 }
 export default function TitlebarImageList(props:ImgListProps) {
     const [sus, setSus] = useState("")
@@ -60,6 +61,9 @@ export default function TitlebarImageList(props:ImgListProps) {
 
     const handleClick = (item: string) =>{
         props.setValue("contentUrl", item)
+        if (props.setPreview != null) {
+            props.setPreview(item)
+        }
     }
     const getData = () =>
         taskService.listFiles(page?page:"1", pageSize?pageSize:"10")
