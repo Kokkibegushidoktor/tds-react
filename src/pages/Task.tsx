@@ -110,7 +110,7 @@ const Task = () => {
                                         <Stack divider={<Divider orientation="vertical" flexItem />}
                                                spacing={1}
                                                direction={'row'}>
-                                            <Typography>{index}</Typography>
+                                            <Typography>{index+1}</Typography>
                                             <Typography>{val.title}</Typography>
                                         </Stack>
                                     </AccordionSummary>

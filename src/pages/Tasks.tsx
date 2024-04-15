@@ -2,7 +2,7 @@ import {IListTasksResponse} from "../service/TaskService.ts";
 import React from "react";
 import {Link, useLocation} from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import {Card, CardActions, CardContent} from "@mui/material";
+import {Card, CardActions, CardContent, Stack} from "@mui/material";
 import taskService from "../service/TaskService.ts";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -56,7 +56,9 @@ const Tasks = () => {
     ) : (
         <>
             {
-                decode.adm?<Link to={"/newtask"}><IconButton sx={{ml:5}}><AddCircleIcon/></IconButton></Link>:<></>
+                decode.adm?<>
+                   <Link to={"/newtask"}><Button sx={{ml:2, mt:2}} startIcon={<AddCircleIcon/>} variant='contained'>Новое Задание</Button></Link>
+                </>:<></>
             }
             {data.results?
                 <Grid sx={{flexDirection:"column", padding:"0 20px"}} mt={2} container justifyContent="center" spacing={2}>

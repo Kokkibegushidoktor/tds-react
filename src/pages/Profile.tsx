@@ -62,7 +62,7 @@ const Profile = () => {
                                    margin="normal"
                                    required
                                    fullWidth
-                                   label="New Username"
+                                   label="Имя пользователя"
                                    autoFocus
                         />
                         <Button
@@ -71,7 +71,7 @@ const Profile = () => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Create New User
+                            Создать нового пользователя
                         </Button>
                     </Box></>:<></>}
             </Container>

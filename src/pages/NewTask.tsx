@@ -31,21 +31,21 @@ const NewTask = () => {
                 }}
             >
                 <Typography component="h1" variant="h5">
-                    Add a new Task
+                    Новое задание
                 </Typography>
                 <Box maxWidth={350} component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                     <TextField {...register('title')}
                                margin="normal"
                                required
                                fullWidth
-                               label="Title"
+                               label="Название"
                                autoFocus
                     />
                     <TextField {...register('description')}
                                margin="normal"
                                required
                                fullWidth
-                               label="Description"
+                               label="Описание"
                                multiline
                                rows={4}
                     />
@@ -55,7 +55,7 @@ const NewTask = () => {
                         variant="contained"
                         sx={{ mt: 1, mb: 2 }}
                     >
-                        Create
+                        Создать
                     </Button>
                     
                 </Box>

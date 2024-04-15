@@ -57,7 +57,7 @@ const Tasks = () => {
                                     <Typography align={'center'}>{val.title}</Typography>
                                     {val.questions?.map((quest) => (
                                         <Box key={quest.id} sx={{p: 1, m: 1, border: '1px dashed grey'}}>
-                                            <Typography>{quest.title}</Typography>
+                                            {/*<Typography>{quest.title}</Typography>*/}
                                             <pre style={{fontFamily: 'inherit', textWrap:'wrap'}}>
                                                 <Typography>{quest.description}</Typography>
                                             </pre>
