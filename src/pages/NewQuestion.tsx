@@ -58,17 +58,18 @@ const NewQuestion = () => {
                                multiline
                                minRows={4}
                     />
-                    <Box
-                        component="img"
-                        sx={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            maxHeight: { xs: 300, md: 167 },
-                            maxWidth: { xs: 350, md: 250 },
-                        }}
-                        alt={""}
-                        src={preview.replace("LOCAL/",BASE_API_URL)}
-                    />
+                    <div style={{textAlign:"center"}}>
+                        <Box
+                            component="img"
+                            sx={{
+                                margin:'auto',
+                                maxHeight: {xs: 300, md: 300},
+                                maxWidth: {xs: 300, md: 350},
+                            }}
+                            alt={""}
+                            src={preview.replace("LOCAL/",BASE_API_URL)}
+                        />
+                    </div>
                     <TextField {...register('contentUrl')}
                                margin="normal"
                                fullWidth

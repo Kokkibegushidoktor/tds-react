@@ -55,14 +55,14 @@ const Login = () => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Вход
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                             <TextField {...register('username')}
                                        margin="normal"
                                        required
                                        fullWidth
-                                       label="Username"
+                                       label="Имя пользователя"
                                        autoFocus
                             />
                             <TextField {...register('password')}
@@ -70,7 +70,7 @@ const Login = () => {
                                        required
                                        fullWidth
                                        name="password"
-                                       label="Password"
+                                       label="Пароль"
                                        type="password"
                                        id="password"
                                        autoComplete="current-password"
@@ -82,24 +82,24 @@ const Login = () => {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Sign In
+                                Войти
                             </Button>
                             <Grid container>
-                                <Grid item xs>
+                                {/*<Grid item xs>
                                     <Link to="#" style={{color: "blue"}}>
                                         Forgot password?
                                     </Link>
-                                </Grid>
+                                </Grid>*/}
                                 <Grid item>
                                     <Link to="/signup" style={{color: "blue"}}>
-                                        {"Don't have an account? Sign Up"}
+                                        {"Нет аккаунта? Зарегистрироваться"}
                                     </Link>
                                 </Grid>
                             </Grid>
                         </Box>
                     </Box>
                 </Container>
-                <AutohideSnackbar open={open} text={"Sign in failed"} setOpen={setOpen} duration={3000}></AutohideSnackbar>
+                <AutohideSnackbar open={open} text={"Вход не удался"} setOpen={setOpen} duration={3000}></AutohideSnackbar>
             </div>
 
     );

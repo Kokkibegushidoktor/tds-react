@@ -12,6 +12,8 @@ import EditLevel from "./pages/EditLevel.tsx";
 import NewQuestion from "./pages/NewQuestion.tsx";
 import NewTask from "./pages/NewTask.tsx";
 import EditQuestion from "./pages/EditQuestion.tsx";
+import TaskVariantView from "./pages/TaskVariantView.tsx";
+import MyVariants from "./pages/MyVariants.tsx";
 
 function App() {
 
@@ -31,6 +33,9 @@ function App() {
                     <Route path="/level/:id/newquest" element={<AuthProvider><NewQuestion/></AuthProvider>}/>
                     <Route path="/newtask" element={<AuthProvider><NewTask/></AuthProvider>}/>
                     <Route path="/quest/:id" element={<AuthProvider><EditQuestion/></AuthProvider>}/>
+                    <Route path="/getvariant/:id" element={<AuthProvider><TaskVariantView/></AuthProvider>}/>
+                    <Route path="/myvariants" element={<AuthProvider><MyVariants/></AuthProvider>}/>
+
                 </Routes>
             </Router>
         </>

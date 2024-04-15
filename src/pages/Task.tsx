@@ -119,7 +119,7 @@ const Task = () => {
                                         <IconButton><DeleteForeverIcon/></IconButton>
                                         <Divider sx={{mt:2, mb:2}} variant="middle" component="p" />
                                         <Typography sx={{wordBreak: "break-word"}}>
-                                            <pre style={{fontFamily: 'inherit'}}>
+                                            <pre style={{fontFamily: 'inherit', textWrap:'wrap'}}>
                                                 {val.description}
                                             </pre>
                                         </Typography>
@@ -127,8 +127,8 @@ const Task = () => {
                                             <Box
                                                 component="img"
                                                 sx={{
-                                                    maxHeight: { xs: 233, md: 167 },
-                                                    maxWidth: { xs: 350, md: 250 },
+                                                    maxHeight: {xs: 300, md: 300},
+                                                    maxWidth: {xs: 300, md: 350},
                                                 }}
                                                 alt={val.title}
                                                 src={val.contentURL.replace("LOCAL/",BASE_API_URL)}

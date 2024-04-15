@@ -113,7 +113,7 @@ function Header() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         ><MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
-                            <Link to={"/tasks"}><Typography color={'black'} textAlign="center">{"Tasks"}</Typography></Link>
+                            <Link to={"/tasks"}><Typography color={'black'} textAlign="center">{"Задания"}</Typography></Link>
                         </MenuItem>
                         </Menu>
                     </Box>
@@ -138,7 +138,8 @@ function Header() {
                         </Typography>
                     </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Link to="/tasks"><Button sx={{ my: 2, color: 'white', display: 'block' }}>Tasks</Button></Link>
+                        <Link to="/tasks"><Button sx={{ my: 2, color: 'white', display: 'block' }}>Задания</Button></Link>
+                        <Link to="/myvariants"><Button sx={{ my: 2, color: 'white', display: 'block' }}>Мои Варианты</Button></Link>
                     </Box>
 
                     {isAuth?
@@ -175,7 +176,7 @@ function Header() {
                             <Button sx={{color:'white', borderColor: 'white', '&:hover': {
                                     borderColor: "#c6b1b1",
                                     color: '#c6b1b1'
-                                },}} variant="outlined">Sign In
+                                },}} variant="outlined">Войти
                             </Button>
                         </Link>
                     }

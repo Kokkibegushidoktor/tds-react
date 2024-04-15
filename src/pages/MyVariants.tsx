@@ -1,37 +1,20 @@
-import {IListTasksResponse} from "../service/TaskService.ts";
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import {Card, CardActions, CardContent} from "@mui/material";
-import taskService from "../service/TaskService.ts";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {HTTPError} from "ky";
-import IconButton from "@mui/material/IconButton";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import {jwtDecode} from "jwt-decode";
-import {OurToken} from "./Profile.tsx";
-function useQuery() {
-    const { search } = useLocation();
 
-    return React.useMemo(() => new URLSearchParams(search), [search]);
-}
-const Tasks = () => {
-    const [data, setData] = React.useState<IListTasksResponse>({
-        page: 0,
-        pageSize: 0,
-        total: 0,
+import variantService, {IGetVariantsResponse} from "../service/VariantService.ts";
+const MyVariants = () => {
+    const [data, setData] = React.useState<IGetVariantsResponse>({
         results: null
     });
     const [isLoading, setIsLoading] = React.useState(true);
-    const query = useQuery()
-    const page = query.get("page")
-    const pageSize = query.get("pageSize")
-    const token = localStorage.getItem("token")
-    const decode = jwtDecode<OurToken>(token?token:"auf")
 
 
-    const handleApiResponse = (response: IListTasksResponse) => {
+    const handleApiResponse = (response: IGetVariantsResponse) => {
         console.log("Res", response);
         setData(response);
         setIsLoading(false);
@@ -47,7 +30,7 @@ const Tasks = () => {
         getData();
     }, []);
     const getData = () =>
-        taskService.listTasks(page?page:"1", pageSize?pageSize:"10")
+        variantService.getMy()
             .then(handleApiResponse)
             .catch(handleApiError)
 
@@ -55,9 +38,6 @@ const Tasks = () => {
         <div>Loading...</div>
     ) : (
         <>
-            {
-                decode.adm?<Link to={"/newtask"}><IconButton sx={{ml:5}}><AddCircleIcon/></IconButton></Link>:<></>
-            }
             {data.results?
                 <Grid sx={{flexDirection:"column", padding:"0 20px"}} mt={2} container justifyContent="center" spacing={2}>
                     {data.results.map((value) => (
@@ -72,15 +52,7 @@ const Tasks = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    {
-                                        decode.adm?<>
-                                                <Link to={"/task/"+value.id}><Button size="small">Просмотр</Button></Link>
-                                                <Link to={"/task/"+value.id}><Button size="small">Удалить</Button></Link>
-                                        </>:
-                                            <>
-                                                <Link to={"/getvariant/"+value.id}><Button size="small">Получить вариант</Button></Link>
-                                            </>
-                                    }
+                                    <Link to={"/getvariant/"+value.taskId}><Button size="small">Просмотр</Button></Link>
 
                                 </CardActions>
                             </Card>
@@ -93,4 +65,4 @@ const Tasks = () => {
     return <div>{content}</div>;
 }
 
-export default Tasks
+export default MyVariants

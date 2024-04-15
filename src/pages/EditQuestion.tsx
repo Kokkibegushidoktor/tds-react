@@ -49,7 +49,7 @@ const EditQuestion = () => {
                 <Typography component="h1" variant="h5">
                     Edit Question
                 </Typography>
-                <Box maxWidth={350} component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
+                <Box maxWidth={350} component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
                     <TextField {...register('title')}
                                margin="normal"
                                required
@@ -67,62 +67,64 @@ const EditQuestion = () => {
                                minRows={4}
                                defaultValue={desc}
                     />
-                    <Box
-                        component="img"
-                        sx={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            maxHeight: { xs: 300, md: 167 },
-                            maxWidth: { xs: 350, md: 250 },
-                        }}
-                        alt={""}
-                        src={preview.replace("LOCAL/",BASE_API_URL)}
-                    />
-                    <TextField {...register('contentUrl')}
-                               margin="normal"
-                               fullWidth
-                               defaultValue={img?img:""}
-                    />
-                    <Typography>Select an image below or enter a custom URL</Typography>
-                    <input accept=".jpg,.jpeg,.png, .webp" onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        if (event.target.files && event.target.files[0]) {
-                            const requestData: FormData = new FormData()
-                            requestData.append('file', event.target.files[0])
-                            taskService.uploadImage(requestData)
-                                .then((resp)=>{
-                                    setValue("contentUrl", resp.url)
-                                    setPreview(resp.url)
-                                })
-                        }
-                    }} ref={fileRef} style={{visibility:"hidden", height:0, width:0}} type={"file"}/>
-                    <Button
-                        type="button"
-                        color={'secondary'}
-                        fullWidth
-                        variant="contained"
-                        onClick={()=>{
-                            if (fileRef.current) {
-                                fileRef.current.click()
+                    <div style={{textAlign: "center"}}>
+                        <Box
+                            component="img"
+                            sx={{
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                maxHeight: {xs: 300, md: 300},
+                                maxWidth: {xs: 300, md: 350},
+                            }}
+                            alt={""}
+                            src={preview.replace("LOCAL/", BASE_API_URL)}
+                        />
+                    </div>
+                        <TextField {...register('contentUrl')}
+                                   margin="normal"
+                                   fullWidth
+                                   defaultValue={img ? img : ""}
+                        />
+                        <Typography>Select an image below or enter a custom URL</Typography>
+                        <input accept=".jpg,.jpeg,.png, .webp" onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            if (event.target.files && event.target.files[0]) {
+                                const requestData: FormData = new FormData()
+                                requestData.append('file', event.target.files[0])
+                                taskService.uploadImage(requestData)
+                                    .then((resp) => {
+                                        setValue("contentUrl", resp.url)
+                                        setPreview(resp.url)
+                                    })
                             }
-                        }}
-                        sx={{ mt: 3 }}
-                    >
-                        Upload a file
-                    </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 1, mb: 2 }}
-                    >
-                        Save
-                    </Button>
+                        }} ref={fileRef} style={{visibility: "hidden", height: 0, width: 0}} type={"file"}/>
+                        <Button
+                            type="button"
+                            color={'secondary'}
+                            fullWidth
+                            variant="contained"
+                            onClick={() => {
+                                if (fileRef.current) {
+                                    fileRef.current.click()
+                                }
+                            }}
+                            sx={{mt: 3}}
+                        >
+                            Upload a file
+                        </Button>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{mt: 1, mb: 2}}
+                        >
+                            Save
+                        </Button>
 
-                    <TitlebarImageList setPreview={setPreview} setValue={setValue}></TitlebarImageList>
+                        <TitlebarImageList setPreview={setPreview} setValue={setValue}></TitlebarImageList>
                 </Box>
             </Box>
         </>
-    )
+)
 }
 
 export default EditQuestion

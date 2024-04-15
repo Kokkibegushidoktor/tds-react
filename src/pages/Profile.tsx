@@ -12,7 +12,7 @@ import AutohideSnackbar from "../components/CustomizableSnackbar.tsx";
 import {HTTPError} from "ky";
 import {IErrorResponse} from "../api/apiInstance.ts";
 
-interface OurToken {
+export interface OurToken {
     sub: string
     name: string
     adm: boolean
