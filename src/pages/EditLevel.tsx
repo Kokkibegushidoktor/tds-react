@@ -45,18 +45,18 @@ const EditLevel = () => {
                 }}
             >
                 <Typography component="h1" variant="h5">
-                    Edit an existing level
+                    Редактирование уровня
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
                     <TextField {...register('title')}
                                margin="normal"
                                required
                                fullWidth
-                               label="Title"
+                               label="Название"
                                autoFocus
                                defaultValue={title}
                     />
-                    <Typography>Number of questions per variant</Typography>
+                    <Typography>Количество вопросов в варианте</Typography>
                     <Input {...register('varQuestCount')}
                            required
                            fullWidth
@@ -75,7 +75,7 @@ const EditLevel = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Save
+                        Сохранить
                     </Button>
                 </Box>
             </Box>

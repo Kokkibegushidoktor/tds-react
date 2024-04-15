@@ -91,7 +91,7 @@ const Task = () => {
                                spacing={1}
                                direction={'row'}>
                             <Typography>{value.title}</Typography>
-                            <Typography>{"QPV: "+value.varQuestCount}</Typography>
+                            <Typography>{"Вопросов в варианте: "+value.varQuestCount}</Typography>
                         </Stack>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -149,8 +149,8 @@ const Task = () => {
     ) : (
         <>
             <Container sx={{mt:2}} component="main" maxWidth="md">
-                <Button onClick={handleModOpen} variant='contained'>Edit</Button>
-                <Link to='newlevel'><Button sx={{ml:2}} startIcon={<AddCircleIcon/>} variant='contained'>New level</Button></Link>
+                <Button onClick={handleModOpen} variant='contained'>Редактировать</Button>
+                <Link to='newlevel'><Button sx={{ml:2}} startIcon={<AddCircleIcon/>} variant='contained'>Новый уровень</Button></Link>
                 <Box component="section" sx={{ p: 2, m:3, border: '1px dashed grey' }}>
                     <Typography fontSize={20} sx={{ wordBreak: "break-word"}} align={'center'}>{data.task.title}</Typography>
                     <Divider variant="middle" component="p" />
