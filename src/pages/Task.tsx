@@ -15,6 +15,8 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {BASE_API_URL} from "../consts/api.ts";
+import QRCode from "react-qr-code";
+import {QrCode} from "@mui/icons-material";
 
 const style = {
     position: 'absolute',
@@ -43,6 +45,9 @@ const Task = () => {
     const [modOpen, setModOpen] = React.useState(false);
     const handleModOpen = () => setModOpen(true);
     const handleModClose = () => setModOpen(false);
+    const [qrOpen, setQrOpen] = React.useState(false);
+    const handleQrOpen = () => setQrOpen(true);
+    const handleQrClose = () => setQrOpen(false);
     const [data, setData] = React.useState<IGetTaskResponse>({
         task: {
             id: "string",
@@ -149,7 +154,8 @@ const Task = () => {
     ) : (
         <>
             <Container sx={{mt:2}} component="main" maxWidth="md">
-                <Button onClick={handleModOpen} variant='contained'>Редактировать</Button>
+                <Button onClick={handleQrOpen} startIcon={<QrCode/>} variant='contained'>Qr</Button>
+                <Button onClick={handleModOpen} sx={{ml:2}} variant='contained'>Редактировать</Button>
                 <Link to='newlevel'><Button sx={{ml:2}} startIcon={<AddCircleIcon/>} variant='contained'>Новый уровень</Button></Link>
                 <Box component="section" sx={{ p: 2, m:3, border: '1px dashed grey' }}>
                     <Typography fontSize={20} sx={{ wordBreak: "break-word"}} align={'center'}>{data.task.title}</Typography>
@@ -191,6 +197,16 @@ const Task = () => {
                             Save
                         </Button>
                     </Box>
+                </Box>
+            </Modal>
+            <Modal
+                open={qrOpen}
+                onClose={handleQrClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <QRCode style={{ height: "auto", maxWidth: "100%", width: "100%" }} value={window.location.href} />
                 </Box>
             </Modal>
         </>
